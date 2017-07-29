@@ -23,10 +23,14 @@ class QueryView extends SelectListView {
   }
 
   viewForItem(item) {
-    icon = this.getIcon_(item.id);
+    if (item.id) {
+        var iconSrcAttr = `src="atom://api-docs/images/icon-${this.getIcon_(item.id)}.png"`;
+    } else {
+        var iconSrcAttr = ``;
+    }
     // HTML escape item.name.
     const text = $('<div/>').text(item.name).html();
-    return `<li><div><img class="api-docs-icon" src="atom://api-docs/images/icon-${icon}.png" />${text}</div></li>`;
+    return `<li><div><img class="api-docs-icon" ${iconSrcAttr} />${text}</div></li>`;
   }
 
   confirmed(item) {
